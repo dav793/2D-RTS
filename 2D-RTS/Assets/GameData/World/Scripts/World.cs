@@ -13,7 +13,7 @@ public class World : MonoBehaviour {
 
 	public static World GWORLD;
 
-	public bool initialized = false;
+	[HideInInspector] public bool initialized = false;
 
 	WorldCell[,] cells;
 
@@ -43,6 +43,21 @@ public class World : MonoBehaviour {
 				cells[x, y] = WorldCell.GetNew(x, y);
 			}
 		}
+	}
+
+	public WorldCell getCell(Coordinates cell_coords) {
+		if (checkCoordinateIntegrity (cell_coords)) {
+			return cells[cell_coords.x, cell_coords.y];
+		}
+		return null;
+	}
+
+	bool checkCoordinateIntegrity(Coordinates cell_coords) {
+		if(cell_coords.x >= 0 && cell_coords.x < cells.GetLength(0) && cell_coords.y >= 0 && cell_coords.y < cells.GetLength(1)) {
+			return true;
+		}
+		Debug.LogError ("Invalid cell range.");
+		return false;
 	}
 
 	void debug() {

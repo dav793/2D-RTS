@@ -15,6 +15,9 @@ public class WorldCell {
 	int _y;
 	CellResourcesData _contained_resources;		
 
+	// Renderer vars
+	GameObject renderedGameObject = null;
+
 	// Class instantiator (replaces the class constructor)
 	public static WorldCell GetNew(int index_x, int index_y) {
 		WorldCell temp = new WorldCell ();				// instantiate
@@ -44,6 +47,34 @@ public class WorldCell {
 		X = index_x;
 		Y = index_y;
 		ContainedResources = CellResourcesData.GetNew();
+	}
+
+
+	// Renderer procedures
+
+	public bool isRendered() {
+		if(renderedGameObject != null) {
+			return true;
+		}
+		return false;
+	}
+
+	public void render(GameObject rendererObj) {
+		if(!isRendered()) {
+			renderedGameObject = rendererObj;
+			renderedGameObject.name = "Cell";
+		}
+	}
+
+	public void unrender() {
+		renderedGameObject = null;
+	}
+
+	public GameObject getRenderedGameObject() {
+		if (isRendered()) {
+			return renderedGameObject;
+		}
+		return null;
 	}
 
 }

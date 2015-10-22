@@ -13,6 +13,7 @@ public class GameData_Config : MonoBehaviour {
 
 	public int WORLD_CELLS_X;			// Amount of horizontal cells in the world
 	public int WORLD_CELLS_Y;			// Amount of vertical cells in the world
+	public int CELL_LENGTH;				// Length of a cell side (in pixels)
 
 	void Awake() {
 		if (CONFIG == null) {
