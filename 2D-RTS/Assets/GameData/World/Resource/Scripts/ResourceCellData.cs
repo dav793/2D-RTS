@@ -37,8 +37,8 @@ public class ResourceCellData {
 	}
 
 	void Init() {
-		Quantity = 1f;
-		RateOfChange = 0f;
+		Quantity = 1.5f;
+		RateOfChange = 0.5f;
 	}
 
 }

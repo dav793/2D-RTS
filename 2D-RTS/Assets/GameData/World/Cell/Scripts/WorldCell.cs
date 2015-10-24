@@ -63,10 +63,16 @@ public class WorldCell {
 		if(!isRendered()) {
 			renderedGameObject = rendererObj;
 			renderedGameObject.name = "Cell";
+			renderedGameObject.GetComponent<CellHandler> ().Init ();
+
+			if(WorldRenderer.WRENDERER.debugUIModeIsActive()) {
+				activateUI();
+			}
 		}
 	}
 
 	public void unrender() {
+		deactivateUI ();
 		renderedGameObject = null;
 	}
 
@@ -77,4 +83,18 @@ public class WorldCell {
 		return null;
 	}
 
+	public void activateUI() {
+		if (isRendered ()) {
+			CellHandler handler = renderedGameObject.GetComponent<CellHandler> ();
+			handler.activateUI();
+			handler.updateUIData(_contained_resources);
+		}
+	}
+
+	public void deactivateUI() {
+		if (isRendered ()) {
+			CellHandler handler = renderedGameObject.GetComponent<CellHandler> ();
+			handler.deactivateUI();	
+		}
+	}
 }

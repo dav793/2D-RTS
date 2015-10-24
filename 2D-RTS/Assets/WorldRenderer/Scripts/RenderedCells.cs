@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RenderedCells {
 
@@ -31,6 +32,18 @@ public class RenderedCells {
 			range.setBoundary (CellRangeBoundaries.TOP_RIGHT, new_top_right);
 			
 		}
+	}
+
+	public List<WorldCell> getActiveCells() {
+		List<WorldCell> active_cells = new List<WorldCell> ();
+
+		for (int y = range.getBoundary(CellRangeBoundaries.BOTTOM_LEFT).y; y <= range.getBoundary(CellRangeBoundaries.TOP_RIGHT).y; ++y) {
+			for (int x = range.getBoundary(CellRangeBoundaries.BOTTOM_LEFT).x; x <= range.getBoundary(CellRangeBoundaries.TOP_RIGHT).x; ++x) { 
+				active_cells.Add ( World.GWORLD.getCell( new Coordinates(x, y) ) );
+			}
+		}
+
+		return active_cells;
 	}
 
 	bool checkCoordinatesIntegrity(Coordinates bottom_left, Coordinates top_right) {

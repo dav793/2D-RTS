@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 /*
  *	Class: WorldRenderer
@@ -13,6 +14,7 @@ public class WorldRenderer : MonoBehaviour {
 	public static WorldRenderer WRENDERER;
 
 	[HideInInspector] public bool initialized = false;
+	bool debug_ui_active = false;
 
 	public GameObjectPool CellPool;
 
@@ -82,7 +84,7 @@ public class WorldRenderer : MonoBehaviour {
 
 	public void renderCell(WorldCell cell) {
 		if (!cell.isRendered ()) {
-			Debug.Log("Rendering cell ("+cell.X+", "+cell.Y+")");
+			//Debug.Log("Rendering cell ("+cell.X+", "+cell.Y+")");
 			cell.render (CellPool.pop ());
 			placeCellGameObject (cell);
 		}
@@ -95,7 +97,7 @@ public class WorldRenderer : MonoBehaviour {
 
 	public void unrenderCell(WorldCell cell) {
 		if (cell.isRendered ()) {
-			Debug.Log("Unrendering cell ("+cell.X+", "+cell.Y+")");
+			//Debug.Log("Unrendering cell ("+cell.X+", "+cell.Y+")");
 			CellPool.push (cell.getRenderedGameObject ());
 			cell.unrender ();
 		}
@@ -108,6 +110,45 @@ public class WorldRenderer : MonoBehaviour {
 			cell.Y * GameData_Config.CONFIG.CELL_LENGTH,
 			cellRObj.transform.position.z
 		);
+	}
+
+	public bool debugUIModeIsActive() {
+		return debug_ui_active;
+	}
+
+	public void toggleDebugUIMode() {
+		if (initialized) {
+			if(debug_ui_active) {
+				deactivateDebugUIMode();
+			}
+			else {
+				activateDebugUIMode();
+			}
+		}
+	}
+
+	void activateDebugUIMode() {
+
+		List<WorldCell> active_cells = rendered_cells.getActiveCells ();
+
+		for (int i = 0; i < active_cells.Count; ++i) {
+			active_cells[i].activateUI ();
+		}
+
+		debug_ui_active = true;
+		//Debug.Log ("debug mode activated");
+	}
+
+	void deactivateDebugUIMode() {
+
+		List<WorldCell> active_cells = rendered_cells.getActiveCells ();
+
+		for (int i = 0; i < active_cells.Count; ++i) {
+			active_cells[i].deactivateUI ();
+		}
+
+		debug_ui_active = false;
+		//Debug.Log ("debug mode deactivated");
 	}
 
 }

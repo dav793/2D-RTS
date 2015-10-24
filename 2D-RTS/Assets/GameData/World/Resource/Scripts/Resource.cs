@@ -27,4 +27,12 @@ public class Resource {
 	
 	}
 
+	public static Resource findResourceByName(string name) {
+		switch (name.ToLower()){
+		case "wood":
+			return RES_Wood.GetNew();
+		}
+		return null;
+	}
+
 }

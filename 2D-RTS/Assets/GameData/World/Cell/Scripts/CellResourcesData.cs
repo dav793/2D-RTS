@@ -35,6 +35,10 @@ public class CellResourcesData {
 		return entries;
 	}
 
+	public Dictionary<Resource, ResourceCellData> getData() {
+		return data;
+	}
+
 	void Init() {
 		data = new Dictionary<Resource, ResourceCellData> ();
 		data.Add (RES_Wood.GetNew(), ResourceCellData.GetNew());
