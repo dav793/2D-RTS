@@ -17,6 +17,7 @@ public class WorldCell {
 
 	// Renderer vars
 	GameObject renderedGameObject = null;
+	CellHandler handler;
 
 	// Class instantiator (replaces the class constructor)
 	public static WorldCell GetNew(int index_x, int index_y) {
@@ -49,8 +50,12 @@ public class WorldCell {
 		ContainedResources = CellResourcesData.GetNew();
 	}
 
+	public void executeTick() {
+		//Debug.Log ("executing tick: ("+X+","+Y+")");
+		ContainedResources.updateCellData ();
+	}
 
-	// Renderer procedures
+	// RENDERER PROCEDURES
 
 	public bool isRendered() {
 		if(renderedGameObject != null) {
@@ -63,7 +68,8 @@ public class WorldCell {
 		if(!isRendered()) {
 			renderedGameObject = rendererObj;
 			renderedGameObject.name = "Cell";
-			renderedGameObject.GetComponent<CellHandler> ().Init ();
+			handler = renderedGameObject.GetComponent<CellHandler> ();
+			handler.Init ();
 
 			if(WorldRenderer.WRENDERER.debugUIModeIsActive()) {
 				activateUI();
@@ -73,6 +79,7 @@ public class WorldCell {
 
 	public void unrender() {
 		deactivateUI ();
+		handler = null;
 		renderedGameObject = null;
 	}
 
@@ -83,17 +90,21 @@ public class WorldCell {
 		return null;
 	}
 
+	public void updateUI () {
+		if (isRendered ()) {
+			handler.updateUIData(ContainedResources);
+		}
+	}
+
 	public void activateUI() {
 		if (isRendered ()) {
-			CellHandler handler = renderedGameObject.GetComponent<CellHandler> ();
 			handler.activateUI();
-			handler.updateUIData(_contained_resources);
+			updateUI ();
 		}
 	}
 
 	public void deactivateUI() {
 		if (isRendered ()) {
-			CellHandler handler = renderedGameObject.GetComponent<CellHandler> ();
 			handler.deactivateUI();	
 		}
 	}

@@ -83,31 +83,27 @@ public class CellUIHandler : MonoBehaviour {
 
 		//remove old resources
 		foreach (KeyValuePair<string, CellUITextPanelHandler> entry in resource_panels) {
-			if ( !data.ContainsKey( Resource.findResourceByName(entry.Key) ) ) {
+			if (!cellContainsResource(contained_resources, entry.Key)) {
 				removeResource (entry.Key);
 			}
 		}
 
 		//update resource values
 		foreach (KeyValuePair<Resource, ResourceCellData> entry in data) {
-
-			if(Resource.findResourceByName(entry.Key.Name) == null) {
-				Debug.LogWarning("No findByName option for resource "+entry.Key.Name+". Add it to function findResourceByName in Resource class.");
-			}
-
 			setResourceQty(entry.Key.Name, entry.Value.Quantity.ToString());
 			setResourceROC(entry.Key.Name, entry.Value.RateOfChange.ToString());
-
 		}
 
-		/*setResourceQty ("wood", "15.0");
-		setResourceROC ("wood", "1.2");
-		
-		setResourceQty ("stone", "5.2");
-		setResourceROC ("stone", "0.3");
+	}
 
-		removeResource ("stone");*/
-
+	bool cellContainsResource(CellResourcesData contained_resources, string resource) {
+		Dictionary<Resource, ResourceCellData> data = contained_resources.getData ();
+		foreach (KeyValuePair<Resource, ResourceCellData> entry in data) {
+			if(entry.Key.Name == resource) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

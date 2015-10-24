@@ -41,7 +41,18 @@ public class CellResourcesData {
 
 	void Init() {
 		data = new Dictionary<Resource, ResourceCellData> ();
+		data.Add (RES_Fire.GetNew(), ResourceCellData.GetNew());
+		data.Add (RES_Water.GetNew(), ResourceCellData.GetNew());
 		data.Add (RES_Wood.GetNew(), ResourceCellData.GetNew());
+		data.Add (RES_Grass.GetNew(), ResourceCellData.GetNew());
+		data.Add (RES_Stone.GetNew(), ResourceCellData.GetNew());
+	}
+
+	public void updateCellData() {
+		foreach (KeyValuePair<Resource, ResourceCellData> entry in data) {
+			float new_qty = entry.Value.Quantity + entry.Value.RateOfChange;
+			entry.Value.Quantity = new_qty; 
+		}
 	}
 
 }

@@ -45,6 +45,17 @@ public class World : MonoBehaviour {
 		}
 	}
 
+	public void executeTick() {
+		Debug.Log ("Executing world tick");
+
+		for (int x = 0; x < GameData_Config.CONFIG.WORLD_CELLS_X; ++x) {
+			for (int y = 0; y < GameData_Config.CONFIG.WORLD_CELLS_Y; ++y) {
+				cells[x, y].executeTick ();
+			}
+		}
+
+	}
+
 	public WorldCell getCell(Coordinates cell_coords) {
 		if (checkCoordinateIntegrity (cell_coords)) {
 			return cells[cell_coords.x, cell_coords.y];

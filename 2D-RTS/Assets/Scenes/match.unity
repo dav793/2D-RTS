@@ -289,8 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6d944db86ac9e47ad95252eb3abcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
   CellPool: {fileID: 558350143}
+  initialized: 0
 --- !u!4 &489798184
 Transform:
   m_ObjectHideFlags: 0
@@ -348,6 +348,7 @@ MonoBehaviour:
   WORLD_CELLS_X: 3
   WORLD_CELLS_Y: 3
   CELL_LENGTH: 32
+  TICK_LENGTH: 0
 --- !u!114 &529001805
 MonoBehaviour:
   m_ObjectHideFlags: 0

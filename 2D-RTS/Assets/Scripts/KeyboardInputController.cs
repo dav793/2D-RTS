@@ -11,12 +11,18 @@ public class KeyboardInputController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.U)) {
-			toggleDebugUIMode();
+			WorldRenderer.WRENDERER.toggleDebugUIMode ();
 		}
-	}
 
-	void toggleDebugUIMode() {
-		WorldRenderer.WRENDERER.toggleDebugUIMode();
+		if (Input.GetKeyDown (KeyCode.R)) {
+			WorldRenderer.WRENDERER.triggerActiveCellUpdate ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.T)) {
+			World.GWORLD.executeTick ();
+			WorldRenderer.WRENDERER.triggerActiveCellUpdate ();
+		}
+
 	}
 
 }
