@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /*
  *	Class: WorldRenderer
  *
- *	Constructs the game world visualization in the Unity scene.
+ *	Constructs and updates the game world visualization in the Unity scene from the data contained in the world data structure.
  *
  */
 public class WorldRenderer : MonoBehaviour {
@@ -101,7 +101,7 @@ public class WorldRenderer : MonoBehaviour {
 	}
 
 	void updateActiveCells() {
-		Debug.Log ("Updating active cells");
+		//Debug.Log ("Updating active cells");
 		List<WorldCell> active_cells = rendered_cells.getActiveCells ();
 		for (int i = 0; i < active_cells.Count; ++i) {
 			updateRenderedCell(active_cells[i]);

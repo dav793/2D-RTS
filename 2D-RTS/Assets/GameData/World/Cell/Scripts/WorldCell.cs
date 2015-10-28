@@ -52,7 +52,7 @@ public class WorldCell {
 
 	public void executeTick() {
 		//Debug.Log ("executing tick: ("+X+","+Y+")");
-		ContainedResources.updateCellData ();
+		ContainedResources.updateResourceValues ();
 	}
 
 	// RENDERER PROCEDURES

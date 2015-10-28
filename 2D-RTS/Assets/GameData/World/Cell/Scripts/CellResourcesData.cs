@@ -48,10 +48,12 @@ public class CellResourcesData {
 		data.Add (RES_Stone.GetNew(), ResourceCellData.GetNew());
 	}
 
-	public void updateCellData() {
+	public void updateResourceValues() {
 		foreach (KeyValuePair<Resource, ResourceCellData> entry in data) {
-			float new_qty = entry.Value.Quantity + entry.Value.RateOfChange;
-			entry.Value.Quantity = new_qty; 
+			entry.Value.updateQuantity ();
+			entry.Value.updateROC ();
+			//float new_qty = entry.Value.Quantity + entry.Value.RateOfChange;
+			//entry.Value.Quantity = new_qty; 
 		}
 	}
 

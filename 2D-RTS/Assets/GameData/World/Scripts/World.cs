@@ -5,8 +5,8 @@ using System.Collections.Generic;
 /*
  *	Class: World
  *
- *	Data structure which contains all cells, and operates on them every tick to change resource quantities and recalculate
- *	resource rates of change.
+ *	Data structure which contains all cells, and operates on them every tick to modify their resource quantities 
+ *	and recalculate their resource rates of change.
  *
  */
 public class World : MonoBehaviour {
@@ -46,14 +46,12 @@ public class World : MonoBehaviour {
 	}
 
 	public void executeTick() {
-		Debug.Log ("Executing world tick");
-
+		//Debug.Log ("Executing world tick");
 		for (int x = 0; x < GameData_Config.CONFIG.WORLD_CELLS_X; ++x) {
 			for (int y = 0; y < GameData_Config.CONFIG.WORLD_CELLS_Y; ++y) {
 				cells[x, y].executeTick ();
 			}
 		}
-
 	}
 
 	public WorldCell getCell(Coordinates cell_coords) {

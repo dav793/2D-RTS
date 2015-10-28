@@ -90,8 +90,8 @@ public class CellUIHandler : MonoBehaviour {
 
 		//update resource values
 		foreach (KeyValuePair<Resource, ResourceCellData> entry in data) {
-			setResourceQty(entry.Key.Name, entry.Value.Quantity.ToString());
-			setResourceROC(entry.Key.Name, entry.Value.RateOfChange.ToString());
+			setResourceQty(entry.Key.Name, entry.Value.Quantity.ToString("F2"));
+			setResourceROC(entry.Key.Name, entry.Value.RateOfChange.ToString("F2"));
 		}
 
 	}
