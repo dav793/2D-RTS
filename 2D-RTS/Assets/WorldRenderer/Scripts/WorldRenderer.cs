@@ -17,7 +17,8 @@ public class WorldRenderer : MonoBehaviour {
 	public GameObjectPool CellPool;
 
 	[HideInInspector] public bool initialized = false;
-	bool debug_ui_active = false;
+	//bool debug_ui_active = false;
+	bool debug_ui_active = true;
 
 	RenderedCells rendered_cells;
 
@@ -87,7 +88,9 @@ public class WorldRenderer : MonoBehaviour {
 	}
 
 	public void triggerActiveCellUpdate () {
-		update_event.Invoke ();
+		if (initialized) {
+			update_event.Invoke ();
+		}
 	}
 	
 	void startListeningForActiveCellUpdates() {

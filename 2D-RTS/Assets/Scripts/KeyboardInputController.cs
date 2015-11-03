@@ -23,6 +23,18 @@ public class KeyboardInputController : MonoBehaviour {
 			WorldRenderer.WRENDERER.triggerActiveCellUpdate ();
 		}
 
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			GameData.GDATA.togglePause();
+		}
+
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			GameData.GDATA.decreaseSpeed();
+		}
+
+		if (Input.GetKeyDown (KeyCode.X)) {
+			GameData.GDATA.increaseSpeed();
+		}
+
 	}
 
 }

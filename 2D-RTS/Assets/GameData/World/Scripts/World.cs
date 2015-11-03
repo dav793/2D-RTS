@@ -26,12 +26,7 @@ public class World : MonoBehaviour {
 		}
 	}
 
-	void Start () {
-		Init ();
-		debug ();
-	}
-
-	void Init() {
+	public void Init() {
 		InitCells ();
 		initialized = true;
 	}
@@ -47,9 +42,11 @@ public class World : MonoBehaviour {
 
 	public void executeTick() {
 		//Debug.Log ("Executing world tick");
-		for (int x = 0; x < GameData_Config.CONFIG.WORLD_CELLS_X; ++x) {
-			for (int y = 0; y < GameData_Config.CONFIG.WORLD_CELLS_Y; ++y) {
-				cells[x, y].executeTick ();
+		if (initialized) {
+			for (int x = 0; x < GameData_Config.CONFIG.WORLD_CELLS_X; ++x) {
+				for (int y = 0; y < GameData_Config.CONFIG.WORLD_CELLS_Y; ++y) {
+					cells [x, y].executeTick ();
+				}
 			}
 		}
 	}
